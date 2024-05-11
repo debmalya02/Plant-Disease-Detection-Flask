@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plant Disease Prediction</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merienda:wght@300..900&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Merienda:wght@300..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+        rel="stylesheet">
+    <style>
+        /* Custom Tailwind-like styles */
+        .group {
+            position: relative;
+            background-color: #FFDDD2;
+        }
+
+        .group .relative {
+            color: #006d77;
+        }
+
+        .group .absolute {
+            top: 0;
+            left: 0;
+            width: 2px;
+            background-color: #E29578;
+            /* Change color to match your Tailwind class */
+            transition: all 0.3s ease-in-out;
+        }
+
+        .group:hover .absolute {
+            width: 100%;
+            background-color: #E29578;
+            /* Change color to match your Tailwind class */
+        }
+
+        .group .relative {
+            z-index: 1;
+        }
+
+        .group:hover .relative {
+            color: #EDF6F9;
+            /* Change color to match your Tailwind class */
+        }
+
+        nav ul li {
+            position: relative;
+            font-family: 'Poppins', sans-serif;
+            font-style: normal;
+
+        }
+
+        p {
+            font-family: 'Poppins', sans-serif;
+            font-style: normal;
+        }
+
+        nav ul li::before {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: #006D77;
+            /* Adjust color as needed */
+            transition: width 0.3s ease;
+        }
+
+        nav ul li:hover::before {
+            width: 100%;
+        }
+
+        header {
+            width: 100%;
+            background-color: rgba(255, 255, 255, 0.697);
+            backdrop-filter: blur(10px);
+            /* Adjust the alpha value (last parameter) for transparency */
+        }
+
+        #drawerMenu {
+            transition: all 0.3s ease-in-out;
+            /* Add these styles for right-to-left animation */
+            transform: translateX(100%);
+            /* Initially hidden off-screen to the right */
+        }
+
+        #drawerMenu.hidden {
+            transform: translateX(0);
+            /* Slide in from the right on open */
+        }
+    </style>
+    <!-- Your other stylesheets, meta tags, etc. -->
+</head>
+
+<body style="background-color: #edf6f9;">
+    <header class="md:text-2xl sticky top-0 z-10">
+        <div class="mx-auto max-w-screen-full px-4 sm:px-6 lg:px-8">
+            <div class="flex h-16 items-center justify-between">
+                <div class="flex-1 md:flex md:items-center md:gap-12">
+                    <button class="block text-teal-600" onclick="scrollToHome()">
+                        <span class="" style="font-family: 'Poppins', sans-serif;
+                        font-weight: 800;
+                        font-style: normal;
+                        ">PlantDoc</span>
+                    </button>
+                </div>
+
+                <div class="md:flex md:items-center md:gap-15">
+                    <nav aria-label="Global" class="hidden md:block">
+                        <ul class="flex items-center gap-12 text-lg">
+                            <li>
+                                <button class="text-gray-900 transition hover:text-gray-500/75"
+                                    onclick="scrollToHome()">
+                                    Home </button>
+                            </li>
+
+                            <li>
+                                <button class="text-gray-900 transition hover:text-gray-500/75"
+                                    onclick="scrollToAbout()">
+                                    About Us </button>
+                            </li>
+
+                            <li>
+                                <button class="text-gray-900 transition hover:text-gray-500/75"
+                                    onclick="scrollToDetection()"> Diesease Detection
+                                </button>
+                            </li>
+                        </ul>
+                    </nav>
+
+                    <div class="block md:hidden">
+                        <button id="menuToggle"
+                            class="rounded bg-gray-100 p-2 text-gray-600 transition hover:text-gray-600/75">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
+                                stroke="currentColor" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+    </header>
+    <div id="drawerMenu" class="fixed inset-0 z-50 hidden" style=" width: 50%;
+    background-color: rgba(4, 45, 72, 0.728);
+    backdrop-filter: blur(10px); right: 0;">
+        <div class="flex justify-end pt-4 pr-4">
+            <button id="closeDrawer" class="text-white">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                    stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            </button>
+        </div>
+        <nav class="flex flex-col items-left pl-3 pt-10">
+            <button class="text-white font-bold hover:text-gray-100 py-5 text-left" onclick="scrollToHome()">🏠
+                Home</button>
+            <button class="text-white font-bold hover:text-gray-100 py-5 text-left" onclick="scrollToAbout()"> 👋
+                About
+                Us</button>
+            <botton class="text-white font-bold hover:text-gray-100 py-5 text-left" onclick="scrollToDetection()">
+                🔍 Diesease
+                Detection</button>
+        </nav>
+    </div>
+
+
+
+    <section class="home overflow-hidden sm:grid sm:grid-cols-2 items-center">
+        <div class="p-8 md:p-12 lg:px-16 lg:py-24">
+            <div class="mx-auto max-w-xl text-center md:text-left">
+                <h2 class="text-2xl font-bold md:text-4xl md:mb-10" style="font-family: 'Poppins', sans-serif;
+                    font-weight: 700;
+                    font-style: normal;
+                    color: #006d77;">
+                    PLANT DISEASE RECOGNITION SYSTEM
+                </h2>
+                <p class="text-gray-500 mt-4 md:pt-30 md:block text-sm md:text-xl"
+                    style="font-family: 'Merienda', cursive; color: #006d77;">
+                    Welcome to the Plant Disease Recognition System! 🌿🔍
+                </p>
+                <p class="text-gray-500 mt-4 md:mt-6 md:block text-sm md:text-xl"
+                    style="font-family: 'Poppins', sans-serif; color: #006d77;">
+                    Our mission is to help in identifying plant diseases efficiently. Upload an image of a plant,
+                    and
+                    our system will analyze it to detect any signs of diseases. Together, let's protect our crops
+                    and
+                    ensure a healthier harvest!
+                </p>
+                <!-- Hover -->
+                <div class="pt-8">
+                    <button
+                        class="group relative inline-flex items-center gap-2 overflow-hidden border rounded-tl-xl rounded-br-xl px-8 py-3 focus:outline-none focus:ring"
+                        href="#">
+                        <span class="absolute inset-y-0 left-0 w-2 transition-all"></span>
+                        <span class="relative text-md font-medium transition-colors">
+                            Detect Diseases
+                        </span>
+                        <svg class="relative icon w-6 h-6 ml-2 transform transition-transform group-hover:scale-95"
+                            xmlns="http://www.w3.org/2000/svg" fill="#006d77" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="p-5 md:p-0">
+            <img alt="" src="https://source.unsplash.com/forest-trees-jFCViYFYcus"
+                class="h-full w-full object-cover rounded-tl-xl rounded-br-xl md:rounded-l-full  md:pt-10 md:pb-2" />
+        </div>
+    </section>
+    <section>
+        <div class="mx-auto max-w-screen-xl px-4 py-8 sm:px-6 lg:px-8 lg:py-6">
+
+            <div class="mt-8 grid grid-cols-1 gap-4 md:grid-cols-3 md:gap-8">
+                <blockquote class="rounded-lg p-6 shadow-sm sm:p-8" style="background-color: #FFDDD2;">
+                    <h2 class="text-center text-lg font-bold tracking-tight text-gray-900 sm:text-2xl" style="color: #006D77;font-family: 'Poppins', sans-serif;
+                        font-style: normal;">How It Works
+                    </h2>
+
+
+                    <ul class="mt-4 text-gray-700 list-disc" style="color: #006D77;">
+                        <li> <strong>Upload Image:</strong> Go to the <strong>Disease Recognition</strong> page and
+                            upload an image of a plant with suspected diseases.</li>
+                        <li><strong>Analysis:</strong> Our system will process the image using advanced algorithms to
+                            identify potential diseases.</li>
+                        <li><strong>Results:</strong> View the results and recommendations for further action.</li>
+                    </ul>
+
+                </blockquote>
+
+                <blockquote class="rounded-lg bg-gray-50 p-6 shadow-sm sm:p-8" style="background-color: #FFDDD2;">
+                    <h2 class="text-center text-lg font-bold tracking-tight text-gray-900 sm:text-2xl" style="color: #006D77; font-family: 'Poppins', sans-serif;
+                        font-style: normal;">Why Choose Us?
+                    </h2>
+
+                    <ul class="mt-4 text-gray-700 list-disc" style="color: #006D77;">
+                        <li> <strong>Accuracy:</strong> Our system utilizes state-of-the-art machine learning techniques
+                            for accurate disease detection.
+                        </li>
+                        <li><strong>User-Friendly:</strong> Simple and intuitive interface for seamless user experience.
+                        </li>
+                        <li><strong>Fast and Efficient:</strong> Receive results in seconds, allowing for quick
+                            decision-making.</li>
+                    </ul>
+                </blockquote>
+                <blockquote class="rounded-lg bg-gray-50 p-6 shadow-sm sm:p-8" style="background-color: #FFDDD2;">
+                    <h2 class="text-center text-lg font-bold tracking-tight text-gray-900 sm:text-2xl" style="color: #006D77; font-family: 'Poppins', sans-serif;
+                        font-style: normal;">Get Started
+                    </h2>
+                    <ul class="mt-4 text-gray-700 list-disc" style="color: #006D77;">
+                        <li> Click on the <strong>Disease Recognition</strong> page in the sidebar to upload an image
+                            and experience
+                            the power of our Plant Disease Recognition System!
+                        </li>
+                        <li>Learn more about the project, our team, and our goals on the <strong>About</strong> page.
+                        </li>
+                    </ul>
+                </blockquote>
+            </div>
+        </div>
+    </section>
+    <span class="relative flex justify-center mt-10">
+        <div
+            class="absolute inset-x-0 top-1/2 h-px -translate-y-1/2 bg-transparent bg-gradient-to-r from-transparent via-gray-500 to-transparent opacity-75">
+        </div>
+
+    </span>
+    <section class="about">
+        <div class="mx-auto max-w-screen-xl px-4 py-16 sm:px-6 sm:py-24 lg:px-8">
+            <div class="max-w-3xl text-center lg:text-left">
+                <h2 class="text-3xl font-bold sm:text-5xl" style="color: #006D77;">
+                    ABOUT US
+                </h2>
+            </div>
+
+            <div class="mt-8 grid grid-cols-1 gap-8 lg:grid-cols-2 lg:gap-16">
+                <div class="relative h-64 overflow-hidden sm:h-80 lg:h-full">
+                    <img alt="" src="https://source.unsplash.com/red-and-black-ladybug-on-plant-ZfiUpzwNthw"
+                        class="absolute inset-0 h-full w-full object-cover rounded-3xl" />
+                </div>
+
+                <div class="lg:py-16">
+                    <article class="space-y-4 text-gray-600 text-center lg:text-left lg:text-xl"
+                        style="color: #006D77;">
+                        <p>
+                            This dataset is recreated using offline augmentation from the original dataset.The original
+                            dataset can be found on this github repo.
+                            This dataset consists of about 87K rgb images of healthy and diseased crop leaves which is
+                            categorized into 38 different classes.The total dataset is divided into 80/20 ratio of
+                            training and validation set preserving the directory structure.
+                            A new directory containing 33 test images is created later for prediction purpose.
+                        </p>
+
+                        <div class="mt-8 sm:mt-12">
+                            <dl class="grid grid-cols-1 gap-4 sm:grid-cols-3">
+                                <div class="flex flex-col rounded-lg px-4 py-8 text-center"
+                                    style="background-color: #cbf5f1;">
+                                    <dd class="text-2xl font-bold text-gray-900 mb-3">Train</dd>
+                                    <dt class="order-last text-lg font-medium text-gray-500">Images</dt>
+
+                                    <dd class="text-3xl font-extrabold text-blue-600 md:text-4xl">70295</dd>
+                                </div>
+
+                                <div class="flex flex-col rounded-lg bg-blue-50 px-4 py-8 text-center"
+                                    style="background-color: #cbf5f1;">
+                                    <dd class="text-2xl font-bold text-gray-900 mb-3">Test</dd>
+                                    <dt class="order-last text-lg font-medium text-gray-500">Images</dt>
+
+                                    <dd class="text-3xl font-extrabold text-blue-600 md:text-4xl">33</dd>
+                                </div>
+
+                                <div class="flex flex-col rounded-lg bg-blue-50 px-4 py-8 text-center"
+                                    style="background-color: #cbf5f1;">
+                                    <dd class="text-2xl font-bold text-gray-900 mb-3">Validation</dd>
+                                    <dt class="order-last text-lg font-medium text-gray-500">Images</dt>
+
+                                    <dd class="text-3xl font-extrabold text-blue-600 md:text-4xl">17572</dd>
+                                </div>
+                            </dl>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </div>
+    </section>
+    <span class="relative flex justify-center mt-10">
+        <div
+            class="absolute inset-x-0 top-1/2 h-px -translate-y-1/2 bg-transparent bg-gradient-to-r from-transparent via-gray-500 to-transparent opacity-75">
+        </div>
+
+    </span>
+    <section class="detection py-20">
+        <div class="mx-auto max-w-screen-xl px-4 lg:flex  lg:items-center">
+            <div class="mx-auto max-w-xl text-center">
+                <h1 class="text-3xl font-extrabold sm:text-5xl" style="color: #006D77;">
+                    DISEASE DETECTION
+                </h1>
+
+                <p class="mt-4 sm:text-xl/relaxed">
+                    First choose a image file (must be jpg, jpeg or png) form your folder then press the predict button
+                    to dectect the disease.
+                </p>
+
+                <div class="mt-8 flex flex-wrap justify-center">
+                    <form action="/predict" method="post" enctype="multipart/form-data">
+                        <input type="file" name="file" accept="image/*" required class="border rounded-lg p-2 mb-2"
+                            style="background-color: #cbf5f1; border-color: #006D77;">
+                        <button type="submit"
+                            class="group relative inline-flex items-center gap-2 overflow-hidden border rounded-tl-xl rounded-br-xl px-8 py-3 focus:outline-none lg:ml-5 focus:ring"
+                            onclick="scrollToDetection()">
+                            <span class="absolute inset-y-0 left-0 w-2 transition-all"></span>
+                            <span class="relative text-md font-medium transition-colors">
+                                Predict
+                            </span>
+                        </button>
+                    </form>
+                    {% if prediction is defined %}
+                    <div class="block mt-10">
+                        <img alt="" src="{{ image_file_name }}"
+                            class="h-56 w-full rounded-bl-3xl rounded-tr-3xl object-cover sm:h-64 lg:h-72" />
+
+                        <div class="mt-4 sm:flex sm:items-center sm:justify-center sm:gap-4">
+                            <strong class="font-medium">{{ prediction }}</strong>
+                        </div>
+                    </div>
+                    {% endif %}
+                </div>
+
+            </div>
+        </div>
+    </section>
+    <script>
+
+        function scrollToHome() {
+            // Get the element with the class name "about"
+            const aboutElement = document.querySelector('.home');
+
+            // Scroll to the about element
+            aboutElement.scrollIntoView({ behavior: 'smooth' });
+        }
+        function scrollToAbout() {
+            // Get the element with the class name "about"
+            const aboutElement = document.querySelector('.about');
+
+            // Scroll to the about element
+            aboutElement.scrollIntoView({ behavior: 'smooth' });
+        }
+        function scrollToDetection() {
+            // Get the element with the class name "about"
+            const aboutElement = document.querySelector('.detection');
+
+            // Scroll to the about element
+            aboutElement.scrollIntoView({ behavior: 'smooth' });
+        }
+        document.getElementById('menuToggle').addEventListener('click', function () {
+            document.getElementById('drawerMenu').classList.toggle('hidden');
+        });
+
+        // Close drawer
+        document.getElementById('closeDrawer').addEventListener('click', function () {
+            document.getElementById('drawerMenu').classList.add('hidden');
+        });
+        document.querySelectorAll('#drawerMenu button').forEach(item => {
+            item.addEventListener('click', event => {
+                document.getElementById('drawerMenu').classList.add('hidden');
+            });
+        });
+    </script>
+    <script>
+
+    </script>
+</body>
+
+</html>
