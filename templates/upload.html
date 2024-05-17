@@ -12,93 +12,11 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Merienda:wght@300..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
         rel="stylesheet">
-    <style>
-        /* Custom Tailwind-like styles */
-        .group {
-            position: relative;
-            background-color: #FFDDD2;
-        }
-
-        .group .relative {
-            color: #006d77;
-        }
-
-        .group .absolute {
-            top: 0;
-            left: 0;
-            width: 2px;
-            background-color: #E29578;
-            /* Change color to match your Tailwind class */
-            transition: all 0.3s ease-in-out;
-        }
-
-        .group:hover .absolute {
-            width: 100%;
-            background-color: #E29578;
-            /* Change color to match your Tailwind class */
-        }
-
-        .group .relative {
-            z-index: 1;
-        }
-
-        .group:hover .relative {
-            color: #EDF6F9;
-            /* Change color to match your Tailwind class */
-        }
-
-        nav ul li {
-            position: relative;
-            font-family: 'Poppins', sans-serif;
-            font-style: normal;
-
-        }
-
-        p {
-            font-family: 'Poppins', sans-serif;
-            font-style: normal;
-        }
-
-        nav ul li::before {
-            content: "";
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background-color: #006D77;
-            /* Adjust color as needed */
-            transition: width 0.3s ease;
-        }
-
-        nav ul li:hover::before {
-            width: 100%;
-        }
-
-        header {
-            width: 100%;
-            background-color: rgba(255, 255, 255, 0.697);
-            backdrop-filter: blur(10px);
-            /* Adjust the alpha value (last parameter) for transparency */
-        }
-
-        #drawerMenu {
-            transition: all 0.3s ease-in-out;
-            /* Add these styles for right-to-left animation */
-            transform: translateX(100%);
-            /* Initially hidden off-screen to the right */
-        }
-
-        #drawerMenu.hidden {
-            transform: translateX(0);
-            /* Slide in from the right on open */
-        }
-    </style>
-    <!-- Your other stylesheets, meta tags, etc. -->
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/styles.css') }}">
 </head>
 
 <body style="background-color: #edf6f9;">
-    <header class="md:text-2xl sticky top-0 z-10">
+    <header class="hiddenHeader :text-2xl sticky top-0 z-10">
         <div class="mx-auto max-w-screen-full px-4 sm:px-6 lg:px-8">
             <div class="flex h-16 items-center justify-between">
                 <div class="flex-1 md:flex md:items-center md:gap-12">
@@ -106,6 +24,7 @@
                         <span class="" style="font-family: 'Poppins', sans-serif;
                         font-weight: 800;
                         font-style: normal;
+                        font-size: x-large;
                         ">PlantDoc</span>
                     </button>
                 </div>
@@ -172,20 +91,20 @@
 
 
 
-    <section class="home overflow-hidden sm:grid sm:grid-cols-2 items-center">
-        <div class="p-8 md:p-12 lg:px-16 lg:py-24">
-            <div class="mx-auto max-w-xl text-center md:text-left">
-                <h2 class="text-2xl font-bold md:text-4xl md:mb-10" style="font-family: 'Poppins', sans-serif;
+    <section class="home overflow-hidden sm:grid sm:grid-cols-2 items-center xs:mb-10">
+        <div class="p-8 lg:py-24 lg:ml-20">
+            <div class="mx-auto max-w-xl text-center md:text-left lg:pl-10">
+                <h2 class="hiddenElements text-2xl font-bold md:text-4xl md:mb-10" style="font-family: 'Poppins', sans-serif;
                     font-weight: 700;
                     font-style: normal;
                     color: #006d77;">
                     PLANT DISEASE RECOGNITION SYSTEM
                 </h2>
-                <p class="text-gray-500 mt-4 md:pt-30 md:block text-sm md:text-xl"
+                <p class="hiddenElements text-gray-500 mt-4 md:pt-30 md:block text-sm md:text-xl"
                     style="font-family: 'Merienda', cursive; color: #006d77;">
                     Welcome to the Plant Disease Recognition System! 🌿🔍
                 </p>
-                <p class="text-gray-500 mt-4 md:mt-6 md:block text-sm md:text-xl"
+                <p class="hiddenElements text-gray-500 mt-4 md:mt-6 md:block text-sm md:text-xl"
                     style="font-family: 'Poppins', sans-serif; color: #006d77;">
                     Our mission is to help in identifying plant diseases efficiently. Upload an image of a plant,
                     and
@@ -196,8 +115,8 @@
                 <!-- Hover -->
                 <div class="pt-8">
                     <button
-                        class="group relative inline-flex items-center gap-2 overflow-hidden border rounded-tl-xl rounded-br-xl px-8 py-3 focus:outline-none focus:ring"
-                        href="#">
+                        class="hiddenElements group relative inline-flex items-center gap-2 overflow-hidden border rounded-tl-xl rounded-br-xl px-8 py-3 focus:outline-none focus:ring"
+                        onclick="scrollToDetection()">
                         <span class="absolute inset-y-0 left-0 w-2 transition-all"></span>
                         <span class="relative text-md font-medium transition-colors">
                             Detect Diseases
@@ -211,16 +130,18 @@
                 </div>
             </div>
         </div>
-        <div class="p-5 md:p-0">
-            <img alt="" src="https://source.unsplash.com/forest-trees-jFCViYFYcus"
-                class="h-full w-full object-cover rounded-tl-xl rounded-br-xl md:rounded-l-full  md:pt-10 md:pb-2" />
+        <div class="ml-10 md:ml-20 md:-mt-20">
+            <img alt="" src="{{ url_for('static', filename='images/Succulent of Strength.png') }}"
+                class="plant object-cover md:pb-2" />
+            <span class="shadow"></span>
         </div>
     </section>
     <section>
         <div class="mx-auto max-w-screen-xl px-4 py-8 sm:px-6 lg:px-8 lg:py-6">
 
             <div class="mt-8 grid grid-cols-1 gap-4 md:grid-cols-3 md:gap-8">
-                <blockquote class="rounded-lg p-6 shadow-sm sm:p-8" style="background-color: #FFDDD2;">
+                <blockquote class="card hiddenElements rounded-lg p-6 shadow-sm sm:p-8"
+                    style="background-color: #FFDDD2;">
                     <h2 class="text-center text-lg font-bold tracking-tight text-gray-900 sm:text-2xl" style="color: #006D77;font-family: 'Poppins', sans-serif;
                         font-style: normal;">How It Works
                     </h2>
@@ -236,7 +157,8 @@
 
                 </blockquote>
 
-                <blockquote class="rounded-lg bg-gray-50 p-6 shadow-sm sm:p-8" style="background-color: #FFDDD2;">
+                <blockquote class="card hiddenElements rounded-lg bg-gray-50 p-6 shadow-sm sm:p-8"
+                    style="background-color: #FFDDD2;">
                     <h2 class="text-center text-lg font-bold tracking-tight text-gray-900 sm:text-2xl" style="color: #006D77; font-family: 'Poppins', sans-serif;
                         font-style: normal;">Why Choose Us?
                     </h2>
@@ -251,7 +173,8 @@
                             decision-making.</li>
                     </ul>
                 </blockquote>
-                <blockquote class="rounded-lg bg-gray-50 p-6 shadow-sm sm:p-8" style="background-color: #FFDDD2;">
+                <blockquote class="card hiddenElements rounded-lg bg-gray-50 p-6 shadow-sm sm:p-8"
+                    style="background-color: #FFDDD2;">
                     <h2 class="text-center text-lg font-bold tracking-tight text-gray-900 sm:text-2xl" style="color: #006D77; font-family: 'Poppins', sans-serif;
                         font-style: normal;">Get Started
                     </h2>
@@ -282,9 +205,11 @@
             </div>
 
             <div class="mt-8 grid grid-cols-1 gap-8 lg:grid-cols-2 lg:gap-16">
-                <div class="relative h-64 overflow-hidden sm:h-80 lg:h-full">
+                <div class="image-container relative h-64 overflow-hidden sm:h-80 lg:h-full">
                     <img alt="" src="https://source.unsplash.com/red-and-black-ladybug-on-plant-ZfiUpzwNthw"
-                        class="absolute inset-0 h-full w-full object-cover rounded-3xl" />
+                        class="img1 absolute inset-0 h-full w-full object-cover rounded-3xl" />
+                    <img alt="" src="https://source.unsplash.com/forest-trees-jFCViYFYcus"
+                        class="img2 absolute inset-0 h-full w-full object-cover rounded-3xl" />
                 </div>
 
                 <div class="lg:py-16">
@@ -299,17 +224,18 @@
                             A new directory containing 33 test images is created later for prediction purpose.
                         </p>
 
-                        <div class="mt-8 sm:mt-12">
-                            <dl class="grid grid-cols-1 gap-4 sm:grid-cols-3">
-                                <div class="flex flex-col rounded-lg px-4 py-8 text-center"
+                        <div class="mt-8 lg:mt-18">
+                            <dl class="grid grid-cols-1 gap-4 sm:grid-cols-3 lg:mt-10">
+                                <div class="card hiddenElements flex flex-col rounded-lg bg-blue-50 px-4 py-8 text-center"
                                     style="background-color: #cbf5f1;">
                                     <dd class="text-2xl font-bold text-gray-900 mb-3">Train</dd>
                                     <dt class="order-last text-lg font-medium text-gray-500">Images</dt>
 
                                     <dd class="text-3xl font-extrabold text-blue-600 md:text-4xl">70295</dd>
+
                                 </div>
 
-                                <div class="flex flex-col rounded-lg bg-blue-50 px-4 py-8 text-center"
+                                <div class="card hiddenElements flex flex-col rounded-lg bg-blue-50 px-4 py-8 text-center"
                                     style="background-color: #cbf5f1;">
                                     <dd class="text-2xl font-bold text-gray-900 mb-3">Test</dd>
                                     <dt class="order-last text-lg font-medium text-gray-500">Images</dt>
@@ -317,7 +243,7 @@
                                     <dd class="text-3xl font-extrabold text-blue-600 md:text-4xl">33</dd>
                                 </div>
 
-                                <div class="flex flex-col rounded-lg bg-blue-50 px-4 py-8 text-center"
+                                <div class="card hiddenElements flex flex-col rounded-lg bg-blue-50 px-4 py-8 text-center"
                                     style="background-color: #cbf5f1;">
                                     <dd class="text-2xl font-bold text-gray-900 mb-3">Validation</dd>
                                     <dt class="order-last text-lg font-medium text-gray-500">Images</dt>
@@ -377,46 +303,7 @@
             </div>
         </div>
     </section>
-    <script>
-
-        function scrollToHome() {
-            // Get the element with the class name "about"
-            const aboutElement = document.querySelector('.home');
-
-            // Scroll to the about element
-            aboutElement.scrollIntoView({ behavior: 'smooth' });
-        }
-        function scrollToAbout() {
-            // Get the element with the class name "about"
-            const aboutElement = document.querySelector('.about');
-
-            // Scroll to the about element
-            aboutElement.scrollIntoView({ behavior: 'smooth' });
-        }
-        function scrollToDetection() {
-            // Get the element with the class name "about"
-            const aboutElement = document.querySelector('.detection');
-
-            // Scroll to the about element
-            aboutElement.scrollIntoView({ behavior: 'smooth' });
-        }
-        document.getElementById('menuToggle').addEventListener('click', function () {
-            document.getElementById('drawerMenu').classList.toggle('hidden');
-        });
-
-        // Close drawer
-        document.getElementById('closeDrawer').addEventListener('click', function () {
-            document.getElementById('drawerMenu').classList.add('hidden');
-        });
-        document.querySelectorAll('#drawerMenu button').forEach(item => {
-            item.addEventListener('click', event => {
-                document.getElementById('drawerMenu').classList.add('hidden');
-            });
-        });
-    </script>
-    <script>
-
-    </script>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
 </body>
 
 </html>

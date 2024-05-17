@@ -1,0 +1,212 @@
+body {
+    background-image: url("../images/Pale Chestnut.webp");
+    background-size: cover; /* Ensures the image covers the entire background */
+    background-position: center; /* Centers the image */
+    background-repeat: no-repeat; /* Prevents the image from repeating */
+}
+.group {
+    position: relative;
+    background-color: #FFDDD2;
+}
+
+.group .relative {
+    color: #006d77;
+}
+
+.group .absolute {
+    top: 0;
+    left: 0;
+    width: 2px;
+    background-color: #E29578;
+    /* Change color to match your Tailwind class */
+    transition: all 0.3s ease-in-out;
+}
+
+.group:hover .absolute {
+    width: 100%;
+    background-color: #E29578;
+    /* Change color to match your Tailwind class */
+}
+
+.group .relative {
+    z-index: 1;
+}
+
+.group:hover .relative {
+    color: #EDF6F9;
+    /* Change color to match your Tailwind class */
+}
+
+nav ul li {
+    position: relative;
+    font-family: 'Poppins', sans-serif;
+    font-style: normal;
+
+}
+
+p {
+    font-family: 'Poppins', sans-serif;
+    font-style: normal;
+}
+
+nav ul li::before {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: #006D77;
+    /* Adjust color as needed */
+    transition: width 0.3s ease;
+}
+
+nav ul li:hover::before {
+    width: 100%;
+}
+
+header {
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0.416);
+    backdrop-filter: blur(10px);
+    opacity: 1;
+    filter: blur(0);
+    transform: translateX(0);
+    /* Adjust the alpha value (last parameter) for transparency */
+}
+
+.hiddenHeader {
+    opacity: 0;
+    filter: blur(5px);
+    transform: translateY(-100%);
+    transition: all 1.5s;
+}
+
+.showHeader {
+    opacity: 1;
+    filter: blur(0);
+    transform: translateY(0);
+}
+
+#drawerMenu {
+    transition: al 0.3s linear;
+    /* Add these styles for right-to-left animation */
+    transform: translateX(100%);
+    /* Initially hidden off-screen to the right */
+}
+
+#drawerMenu.hidden {
+    transform: translateX(0);
+    /* Slide in from the right on open */
+}
+
+.hiddenElements {
+    opacity: 0;
+    filter: blur(5px);
+    transform: translateX(-100%);
+    transition: all 1.5s;
+}
+
+.showElements {
+    opacity: 1;
+    filter: blur(0);
+    transform: translateX(0);
+}
+
+.card:nth-child(2) {
+    transition-delay: 200ms;
+}
+
+.card:nth-child(3) {
+    transition-delay: 400ms;
+}
+
+@media(prefers-reduced-motion) {
+    .hidden {
+        transition: none;
+    }
+}
+
+.plant {
+    animation: float 3s ease-out infinite;
+    width: 500px;
+    height: auto;
+}
+
+@keyframes float {
+    50% {
+        transform: translate(0, 60px);
+    }
+}
+
+.shadow {
+    position: absolute;
+    height: 15px;
+    top: 60%;
+    left: 70%;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    background-color: rgba(0, 0, 0, 0.3);
+    filter: blur(3px);
+    animation: shrink 3s ease-out infinite;
+}
+
+@keyframes shrink {
+    0% {
+        width: 20%;
+    }
+
+    50% {
+        width: 10%;
+    }
+
+    100% {
+        width: 20%;
+    }
+}
+
+@media(max-width:600px) {
+    .plant {
+        width: 250px;
+        margin-left: 25px;
+        margin-bottom: 40px;
+    }
+
+    .shadow {
+        margin-bottom: 10px;
+        height: 15px;
+        top: 88%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        border-radius: 50%;
+        background-color: rgba(0, 0, 0, 0.3);
+        filter: blur(3px);
+        animation: shrink 3s ease-out infinite;
+    }
+}
+.img1 {
+    position: absolute;
+    top: 0;
+    left: 0;
+    transition: opacity 0.5s ease;
+    opacity: 1;
+}
+
+/* Second image styles */
+.img2 {
+    position: absolute;
+    top: 0;
+    left: -100%;
+    transition: left 0.5s ease, opacity 0.5s ease;
+    opacity: 0;
+}
+
+/* Hover effects */
+.image-container:hover .img1 {
+    opacity: 0;
+}
+
+.image-container:hover .img2 {
+    left: 0;
+    opacity: 1;
+}
