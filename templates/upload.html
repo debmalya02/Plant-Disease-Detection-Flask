@@ -207,6 +207,47 @@
         </span>
     </section>
 
+    <section class="detection py-20 relative">
+        <div class="content mx-auto max-w-screen-xl px-4 lg:flex  lg:items-center">
+            <div class="mx-auto max-w-xl text-center">
+                <h1 class="text-3xl font-extrabold sm:text-5xl" style="color: #47F0FF;">
+                    DISEASE DETECTION
+                </h1>
+
+                <p class="mt-4 sm:text-xl/relaxed" style="color: #47F0FF;">
+                    First choose a image file (must be jpg, jpeg or png) form your folder then press the predict button
+                    to dectect the disease.
+                </p>
+
+                <div class="mt-8 flex flex-wrap justify-center">
+                    <form action="/predict" method="post" enctype="multipart/form-data">
+                        <input type="file" name="file" accept="image/*" required class="border rounded-lg p-2 mb-2"
+                            style="background-color: #00ac9a; border-color: #007883;">
+                        <button type="submit"
+                            class="group relative inline-flex items-center gap-2 overflow-hidden border rounded-tl-xl rounded-br-xl px-8 py-3 focus:outline-none lg:ml-5 focus:ring"
+                            onclick="scrollToDetection()">
+                            <span class="absolute inset-y-0 left-0 w-2 transition-all"></span>
+                            <span class="relative text-md font-medium transition-colors">
+                                Predict
+                            </span>
+                        </button>
+                    </form>
+                    {% if prediction is defined %}
+                    <div class="block mt-10">
+                        <img alt="" src="{{ image_file_name }}"
+                            class="h-56 w-full rounded-bl-3xl rounded-tr-3xl object-cover sm:h-64 lg:h-72" />
+
+                        <div class="mt-4 sm:flex sm:items-center sm:justify-center sm:gap-4">
+                            <strong class="font-medium" style="color: #47F0FF;">{{ prediction }}</strong>
+                        </div>
+                    </div>
+                    {% endif %}
+                </div>
+
+            </div>
+        </div>
+    </section>
+
     <section class="about relative" style="background-color: #003329;">
         <div class="mx-auto max-w-screen-xl px-4 py-16 sm:px-6 sm:py-24 lg:px-8">
             <div class="max-w-3xl text-center lg:text-left">
@@ -275,46 +316,7 @@
         </span>
     </section>
 
-    <section class="detection py-20 relative">
-        <div class="content mx-auto max-w-screen-xl px-4 lg:flex  lg:items-center">
-            <div class="mx-auto max-w-xl text-center">
-                <h1 class="text-3xl font-extrabold sm:text-5xl" style="color: #47F0FF;">
-                    DISEASE DETECTION
-                </h1>
 
-                <p class="mt-4 sm:text-xl/relaxed" style="color: #47F0FF;">
-                    First choose a image file (must be jpg, jpeg or png) form your folder then press the predict button
-                    to dectect the disease.
-                </p>
-
-                <div class="mt-8 flex flex-wrap justify-center">
-                    <form action="/predict" method="post" enctype="multipart/form-data">
-                        <input type="file" name="file" accept="image/*" required class="border rounded-lg p-2 mb-2"
-                            style="background-color: #00ac9a; border-color: #007883;">
-                        <button type="submit"
-                            class="group relative inline-flex items-center gap-2 overflow-hidden border rounded-tl-xl rounded-br-xl px-8 py-3 focus:outline-none lg:ml-5 focus:ring"
-                            onclick="scrollToDetection()">
-                            <span class="absolute inset-y-0 left-0 w-2 transition-all"></span>
-                            <span class="relative text-md font-medium transition-colors">
-                                Predict
-                            </span>
-                        </button>
-                    </form>
-                    {% if prediction is defined %}
-                    <div class="block mt-10">
-                        <img alt="" src="{{ image_file_name }}"
-                            class="h-56 w-full rounded-bl-3xl rounded-tr-3xl object-cover sm:h-64 lg:h-72" />
-
-                        <div class="mt-4 sm:flex sm:items-center sm:justify-center sm:gap-4">
-                            <strong class="font-medium" style="color: #47F0FF;">{{ prediction }}</strong>
-                        </div>
-                    </div>
-                    {% endif %}
-                </div>
-
-            </div>
-        </div>
-    </section>
     <script src="{{ url_for('static', filename='js/script.js') }}"></script>
 </body>
 

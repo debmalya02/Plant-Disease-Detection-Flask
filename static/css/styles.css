@@ -308,3 +308,12 @@ header {
     height: 100%;
     z-index: 0;
 }
+@media (max-width: 600px) {
+    .detection {
+        height: 60vh;
+    }
+
+    .detection .content {
+        font-size: 0.5rem;
+    }
+}
