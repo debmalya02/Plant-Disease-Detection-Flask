@@ -277,3 +277,34 @@ header {
     left: 0;
     opacity: 1;
 }
+
+.detection{
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 90vh;
+    overflow: hidden;
+    background-image: url('https://source.unsplash.com/tall-trees-with-dried-leaves-on-ground-7ne3hNnojvU');
+    background-attachment: fixed;
+    background-size: cover;
+    background-position: center;
+}
+.detection .content{
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    color: #fff; /* Adjust text color as needed */
+    padding: 20px;
+    box-sizing: border-box;
+}
+.detection::before{
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    height: 100%;
+    z-index: 0;
+}
