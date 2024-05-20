@@ -1,9 +1,12 @@
 body {
-    background-image: url("../images/Pale Chestnut.webp");
-    background-size: cover; /* Ensures the image covers the entire background */
-    background-position: center; /* Centers the image */
-    background-repeat: no-repeat; /* Prevents the image from repeating */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    overflow-x: hidden;
+    margin: 0;
+    padding: 0;
 }
+
 .group {
     position: relative;
     background-color: #FFDDD2;
@@ -18,14 +21,12 @@ body {
     left: 0;
     width: 2px;
     background-color: #E29578;
-    /* Change color to match your Tailwind class */
     transition: all 0.3s ease-in-out;
 }
 
 .group:hover .absolute {
     width: 100%;
     background-color: #E29578;
-    /* Change color to match your Tailwind class */
 }
 
 .group .relative {
@@ -34,14 +35,12 @@ body {
 
 .group:hover .relative {
     color: #EDF6F9;
-    /* Change color to match your Tailwind class */
 }
 
 nav ul li {
     position: relative;
     font-family: 'Poppins', sans-serif;
     font-style: normal;
-
 }
 
 p {
@@ -57,7 +56,6 @@ nav ul li::before {
     width: 0;
     height: 2px;
     background-color: #006D77;
-    /* Adjust color as needed */
     transition: width 0.3s ease;
 }
 
@@ -72,7 +70,6 @@ header {
     opacity: 1;
     filter: blur(0);
     transform: translateX(0);
-    /* Adjust the alpha value (last parameter) for transparency */
 }
 
 .hiddenHeader {
@@ -89,15 +86,50 @@ header {
 }
 
 #drawerMenu {
-    transition: al 0.3s linear;
-    /* Add these styles for right-to-left animation */
+    transition: all 0.3s linear;
     transform: translateX(100%);
-    /* Initially hidden off-screen to the right */
 }
 
 #drawerMenu.hidden {
     transform: translateX(0);
-    /* Slide in from the right on open */
+}
+
+.parallax {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 90vh;
+    overflow: hidden;
+}
+
+#text {
+    position: absolute;
+    top: 45%;
+    transform: translateY(-50%);
+    font-size: 5rem;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    font-style: bold;
+    text-align: center;
+    padding: 0 10px;
+    box-sizing: border-box;
+    
+    background: linear-gradient(45deg, #8cff77, #fcff64);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+
+.parallax img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    pointer-events: none;
 }
 
 .hiddenElements {
@@ -142,7 +174,8 @@ header {
 .shadow {
     position: absolute;
     height: 15px;
-    top: 60%;
+    width: 20%;
+    top: 89%;
     left: 70%;
     transform: translate(-50%, -50%);
     border-radius: 50%;
@@ -155,17 +188,15 @@ header {
     0% {
         width: 20%;
     }
-
     50% {
         width: 10%;
     }
-
     100% {
         width: 20%;
     }
 }
 
-@media(max-width:600px) {
+@media(max-width: 600px) {
     .plant {
         width: 250px;
         margin-left: 25px;
@@ -175,15 +206,53 @@ header {
     .shadow {
         margin-bottom: 10px;
         height: 15px;
-        top: 88%;
-        left: 50%;
+        width: 20%;
+        top: 100%;
+        left: 52%;
         transform: translate(-50%, -50%);
         border-radius: 50%;
         background-color: rgba(0, 0, 0, 0.3);
         filter: blur(3px);
         animation: shrink 3s ease-out infinite;
     }
+
+    #text {
+        font-size: 2rem;
+    }
+
+    .home, .about, .detection {
+        padding: 10px;
+    }
+
+    .home .mx-auto, .about .mx-auto, .detection .mx-auto {
+        padding: 10px;
+    }
+
+    .hiddenElements, .card {
+        transform: translateX(0);
+        transition: none;
+    }
+
+    .card {
+        padding: 20px;
+    }
+
+    nav ul {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    nav ul li {
+        text-align: center;
+    }
+
+    .block {
+        display: block;
+        width: 100%;
+        text-align: center;
+    }
 }
+
 .img1 {
     position: absolute;
     top: 0;
@@ -192,7 +261,6 @@ header {
     opacity: 1;
 }
 
-/* Second image styles */
 .img2 {
     position: absolute;
     top: 0;
@@ -201,7 +269,6 @@ header {
     opacity: 0;
 }
 
-/* Hover effects */
 .image-container:hover .img1 {
     opacity: 0;
 }

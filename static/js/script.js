@@ -1,3 +1,30 @@
+let text = document.getElementById("text");
+let leaf = document.getElementById("leaf");
+let hill1 = document.getElementById("hill1");
+let hill4 = document.getElementById("hill4");
+let hill5 = document.getElementById("hill5");
+
+let ticking = false;
+
+window.addEventListener("scroll", () => {
+  if (!ticking) {
+    window.requestAnimationFrame(() => {
+      let value = window.scrollY;
+
+      text.style.marginTop = Math.min(value * 2.5, window.innerHeight) + "px";
+      leaf.style.top = Math.max(value * -1.5, -leaf.clientHeight) + "px";
+      leaf.style.left = value * 1.5 + "px";
+      hill5.style.left = value * 1.5 + "px";
+      hill4.style.left = value * -1.5 + "px";
+      hill1.style.top = value * 1 + "px";
+
+      ticking = false;
+    });
+
+    ticking = true;
+  }
+});
+
 function scrollToHome() {
   // Get the element with the class name "about"
   const aboutElement = document.querySelector(".home");

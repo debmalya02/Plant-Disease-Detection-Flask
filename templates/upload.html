@@ -15,7 +15,7 @@
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/styles.css') }}">
 </head>
 
-<body style="background-color: #edf6f9;">
+<body>
     <header class="hiddenHeader :text-2xl sticky top-0 z-10">
         <div class="mx-auto max-w-screen-full px-4 sm:px-6 lg:px-8">
             <div class="flex h-16 items-center justify-between">
@@ -88,24 +88,34 @@
                 Detection</button>
         </nav>
     </div>
+    <section class="parallax">
+        <img src="{{ url_for('static', filename='images/hill1.png') }}" id="hill1" />
+        <img src="{{ url_for('static', filename='images/hill2.png') }}" id="hill2" />
+        <img src="{{ url_for('static', filename='images/hill3.png') }}" id="hill3" />
+        <img src="{{ url_for('static', filename='images/hill4.png') }}" id="hill4" />
+        <img src="{{ url_for('static', filename='images/hill5.png') }}" id="hill5" />
+        <img src="{{ url_for('static', filename='images/tree.png') }}" id="tree" />
+        <h2 id="text">Plant Leaf Disease Detection</h2>
+        <img src="{{ url_for('static', filename='images/leaf.png') }}" id="leaf" />
+        <img src="{{ url_for('static', filename='images/plant.png') }}" id="plant" />
+    </section>
 
 
-
-    <section class="home overflow-hidden sm:grid sm:grid-cols-2 items-center xs:mb-10">
+    <section class="home relative  sm:grid sm:grid-cols-2 items-center xs:mb-10" style="background-color: #003329;">
         <div class="p-8 lg:py-24 lg:ml-20">
             <div class="mx-auto max-w-xl text-center md:text-left lg:pl-10">
                 <h2 class="hiddenElements text-2xl font-bold md:text-4xl md:mb-10" style="font-family: 'Poppins', sans-serif;
                     font-weight: 700;
                     font-style: normal;
-                    color: #006d77;">
+                    color: #47F0FF;">
                     PLANT DISEASE RECOGNITION SYSTEM
                 </h2>
                 <p class="hiddenElements text-gray-500 mt-4 md:pt-30 md:block text-sm md:text-xl"
-                    style="font-family: 'Merienda', cursive; color: #006d77;">
+                    style="font-family: 'Merienda', cursive; color: #47F0FF;">
                     Welcome to the Plant Disease Recognition System! 🌿🔍
                 </p>
                 <p class="hiddenElements text-gray-500 mt-4 md:mt-6 md:block text-sm md:text-xl"
-                    style="font-family: 'Poppins', sans-serif; color: #006d77;">
+                    style="font-family: 'Poppins', sans-serif; color: #47F0FF;">
                     Our mission is to help in identifying plant diseases efficiently. Upload an image of a plant,
                     and
                     our system will analyze it to detect any signs of diseases. Together, let's protect our crops
@@ -136,7 +146,7 @@
             <span class="shadow"></span>
         </div>
     </section>
-    <section>
+    <section class="relative" style="background-color: #003329;">
         <div class="mx-auto max-w-screen-xl px-4 py-8 sm:px-6 lg:px-8 lg:py-6">
 
             <div class="mt-8 grid grid-cols-1 gap-4 md:grid-cols-3 md:gap-8">
@@ -189,17 +199,18 @@
                 </blockquote>
             </div>
         </div>
-    </section>
-    <span class="relative flex justify-center mt-10">
-        <div
-            class="absolute inset-x-0 top-1/2 h-px -translate-y-1/2 bg-transparent bg-gradient-to-r from-transparent via-gray-500 to-transparent opacity-75">
-        </div>
+        <span class="relative flex justify-center mt-10">
+            <div
+                class="absolute inset-x-0 top-1/2 h-px -translate-y-1/2 bg-transparent bg-gradient-to-r from-transparent via-gray-500 to-transparent opacity-75">
+            </div>
 
-    </span>
-    <section class="about">
+        </span>
+    </section>
+
+    <section class="about relative" style="background-color: #003329;">
         <div class="mx-auto max-w-screen-xl px-4 py-16 sm:px-6 sm:py-24 lg:px-8">
             <div class="max-w-3xl text-center lg:text-left">
-                <h2 class="text-3xl font-bold sm:text-5xl" style="color: #006D77;">
+                <h2 class="text-3xl font-bold sm:text-5xl" style="color: #47F0FF;">
                     ABOUT US
                 </h2>
             </div>
@@ -214,7 +225,7 @@
 
                 <div class="lg:py-16">
                     <article class="space-y-4 text-gray-600 text-center lg:text-left lg:text-xl"
-                        style="color: #006D77;">
+                        style="color: #47F0FF;">
                         <p>
                             This dataset is recreated using offline augmentation from the original dataset.The original
                             dataset can be found on this github repo.
@@ -256,21 +267,22 @@
                 </div>
             </div>
         </div>
-    </section>
-    <span class="relative flex justify-center mt-10">
-        <div
-            class="absolute inset-x-0 top-1/2 h-px -translate-y-1/2 bg-transparent bg-gradient-to-r from-transparent via-gray-500 to-transparent opacity-75">
-        </div>
+        <span class="relative flex justify-center mt-10">
+            <div
+                class="absolute inset-x-0 top-1/2 h-px -translate-y-1/2 bg-transparent bg-gradient-to-r from-transparent via-gray-500 to-transparent opacity-75">
+            </div>
 
-    </span>
-    <section class="detection py-20">
+        </span>
+    </section>
+
+    <section class="detection py-20 relative" style="background-color: #003329;">
         <div class="mx-auto max-w-screen-xl px-4 lg:flex  lg:items-center">
             <div class="mx-auto max-w-xl text-center">
-                <h1 class="text-3xl font-extrabold sm:text-5xl" style="color: #006D77;">
+                <h1 class="text-3xl font-extrabold sm:text-5xl" style="color: #47F0FF;">
                     DISEASE DETECTION
                 </h1>
 
-                <p class="mt-4 sm:text-xl/relaxed">
+                <p class="mt-4 sm:text-xl/relaxed" style="color: #47F0FF;">
                     First choose a image file (must be jpg, jpeg or png) form your folder then press the predict button
                     to dectect the disease.
                 </p>
@@ -278,7 +290,7 @@
                 <div class="mt-8 flex flex-wrap justify-center">
                     <form action="/predict" method="post" enctype="multipart/form-data">
                         <input type="file" name="file" accept="image/*" required class="border rounded-lg p-2 mb-2"
-                            style="background-color: #cbf5f1; border-color: #006D77;">
+                            style="background-color: #cbf5f1; border-color: #47F0FF;">
                         <button type="submit"
                             class="group relative inline-flex items-center gap-2 overflow-hidden border rounded-tl-xl rounded-br-xl px-8 py-3 focus:outline-none lg:ml-5 focus:ring"
                             onclick="scrollToDetection()">
@@ -294,7 +306,7 @@
                             class="h-56 w-full rounded-bl-3xl rounded-tr-3xl object-cover sm:h-64 lg:h-72" />
 
                         <div class="mt-4 sm:flex sm:items-center sm:justify-center sm:gap-4">
-                            <strong class="font-medium">{{ prediction }}</strong>
+                            <strong class="font-medium" style="color: #47F0FF;">{{ prediction }}</strong>
                         </div>
                     </div>
                     {% endif %}
